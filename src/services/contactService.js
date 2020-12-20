@@ -1,7 +1,8 @@
 export const contactService = {
     getContacts,
     removeContact,
-    addContact
+    saveContact,
+    getContactById,
 }
 
 
@@ -170,6 +171,24 @@ function removeContact(id) {
     contacts.splice(idx, 1)
 }
 
-function addContact(contact) {
+
+function saveContact(contact) {
+    return contact._id ? _updateContact(contact) : _addContact(contact)
+}
+
+
+function _addContact(contact) {
+    contact._id = Math.random()
     contacts.unshift(contact)
+    return contact
+}
+
+function _updateContact(contact) {
+    const idx = contacts.findIndex(c => c._id === contact._id)
+    contacts.splice(idx, 1, contact)
+    return contact
+}
+
+function getContactById(id) {
+    return contacts.find(contact => contact._id === id)
 }

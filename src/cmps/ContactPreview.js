@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements'
-export default function ContactPreview({ contact, removeContact }) {
+export default function ContactPreview({ contact, removeContact,editContact }) {
 
     const [showInfo, setShowInfo] = useState(false)
-
-
+   
     return (
         <TouchableOpacity onPress={() => setShowInfo(!showInfo)}>
             <  View style={styles.contactPreview}>
@@ -17,6 +16,9 @@ export default function ContactPreview({ contact, removeContact }) {
                         <Text ><Text style={styles.detail}>Gold:  </Text>{contact.gold}</Text>
                     </View>}
                 </View>
+                <TouchableOpacity onPress={() => editContact(contact._id)} >
+                    <Text>edit</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => removeContact(contact._id)} >
                     <Image style={styles.removeIcon}
                         source={require('../../assets/img/remove.png')}>

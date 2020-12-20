@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import ContactPreview from './ContactPreview'
-export default function ContactList({ contacts, removeContact }) {
+export default function ContactList({ contacts, removeContact, editContact }) {
 
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export default function ContactList({ contacts, removeContact }) {
                 data={contacts}
                 keyExtractor={(contact) => contact._id}
                 renderItem={({ item }) => (
-                    <ContactPreview removeContact={removeContact} contact={item} />
+                    <ContactPreview removeContact={removeContact} editContact={editContact} contact={item} />
                 )}
             />
         </  View >

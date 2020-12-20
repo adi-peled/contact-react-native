@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 import { connect } from 'react-redux';
-export default function AddContact({ addContact }) {
+export default function AddContact({ saveContact, contact }) {
 
     const [showAdd, setShow] = useState(false)
-    const [contact, setContact] = useState(
+    const [editedContact, setEditedContact] = useState(
         {
             _id: '',
             name: '',
@@ -15,16 +15,21 @@ export default function AddContact({ addContact }) {
         }
     )
 
+    useEffect(() => {
+        if (contact) {
+            setEditedContact(contact)
+        }
+    }, [contact])
+
     const onAddContact = () => {
-        setContact({ ...contact, _id: Math.random() })
-        if (!contact.name || !contact.email || !contact.phone || !contact.gold) {
+        if (!editedContact.name || !editedContact.email || !editedContact.phone || !editedContact.gold) {
             Alert.alert(' Fill all inputs', 'you must fill all inputs', [
                 { text: 'understood', onPress: () => console.log('alert close') }
             ])
             return
         }
-        addContact(contact)
-        setContact({
+        saveContact(editedContact)
+        setEditedContact({
             _id: '',
             name: '',
             email: '',
@@ -32,6 +37,7 @@ export default function AddContact({ addContact }) {
             gold: ''
         })
     }
+
 
     return (
         <  View style={styles.addContact}>
@@ -42,10 +48,14 @@ export default function AddContact({ addContact }) {
                 </View>
             </TouchableOpacity>
             {showAdd && <View style={styles.form}>
-                <TextInput style={styles.input} value={contact.name} placeholder="enter name" onChangeText={(val) => setContact({ ...contact, name: val })} />
-                <TextInput style={styles.input} value={contact.email} placeholder="enter email" onChangeText={(val) => setContact({ ...contact, email: val })} />
-                <TextInput style={styles.input} value={contact.phone} keyboardType="numeric" placeholder="enter phone number" onChangeText={(val) => setContact({ ...contact, phone: val })} />
-                <TextInput style={styles.input} value={contact.gold} keyboardType="numeric" placeholder="enter gold" onChangeText={(val) => setContact({ ...contact, gold: val })} />
+                <TextInput style={styles.input} value={editedContact.name} placeholder="enter name"
+                 onChangeText={(val) => setEditedContact({ ...editedContact, name: val })} />
+                <TextInput style={styles.input} value={editedContact.email} placeholder="enter email"
+                 onChangeText={(val) => setEditedContact({ ...editedContact, email: val })} />
+                <TextInput style={styles.input} value={editedContact.phone} keyboardType="numeric" placeholder="enter phone number"
+                 onChangeText={(val) => setEditedContact({ ...editedContact, phone: val })} />
+                <TextInput style={styles.input} value={editedContact.gold} keyboardType="numeric" placeholder="enter gold"
+                 onChangeText={(val) => setEditedContact({ ...editedContact, gold: val })} />
 
                 <TouchableOpacity onPress={() => onAddContact()} >
                     <View style={styles.btn} >
