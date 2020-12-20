@@ -17,6 +17,7 @@ export default function AddContact({ saveContact, contact }) {
 
     useEffect(() => {
         if (contact) {
+            setShow(true)
             setEditedContact(contact)
         }
     }, [contact])
@@ -49,13 +50,13 @@ export default function AddContact({ saveContact, contact }) {
             </TouchableOpacity>
             {showAdd && <View style={styles.form}>
                 <TextInput style={styles.input} value={editedContact.name} placeholder="enter name"
-                 onChangeText={(val) => setEditedContact({ ...editedContact, name: val })} />
+                    onChangeText={(val) => setEditedContact({ ...editedContact, name: val })} />
                 <TextInput style={styles.input} value={editedContact.email} placeholder="enter email"
-                 onChangeText={(val) => setEditedContact({ ...editedContact, email: val })} />
+                    onChangeText={(val) => setEditedContact({ ...editedContact, email: val })} />
                 <TextInput style={styles.input} value={editedContact.phone} keyboardType="numeric" placeholder="enter phone number"
-                 onChangeText={(val) => setEditedContact({ ...editedContact, phone: val })} />
+                    onChangeText={(val) => setEditedContact({ ...editedContact, phone: val })} />
                 <TextInput style={styles.input} value={editedContact.gold} keyboardType="numeric" placeholder="enter gold"
-                 onChangeText={(val) => setEditedContact({ ...editedContact, gold: val })} />
+                    onChangeText={(val) => setEditedContact({ ...editedContact, gold: val })} />
 
                 <TouchableOpacity onPress={() => onAddContact()} >
                     <View style={styles.btn} >
