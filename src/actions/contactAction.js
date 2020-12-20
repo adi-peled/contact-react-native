@@ -8,12 +8,10 @@ export const loadContacts = (filter) => async dispatch => {
 
 export const removeContact = (id) => async dispatch => {
     await contactService.removeContact(id);
-    const contacts = await contactService.getContacts()
-    return dispatch({ type: 'SET_CONTACTS', contacts })
+    return dispatch({ type: 'REMOVE_CONTACT', id })
 }
 
 export const addContact = (contact) => async dispatch => {
     await contactService.addContact(contact)
-    const contacts = await contactService.getContacts()
-    return dispatch({ type: 'SET_CONTACTS', contacts })
+    return dispatch({ type: 'ADD_CONTACT', contact })
 }

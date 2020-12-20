@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
         case 'ADD_CONTACT':
             return {
                 ...state,
-                contacts: [...state.contacts, action.contact]
+                contacts: [action.contact, ...state.contacts]
             }
         case 'REMOVE_CONTACT':
             return {
